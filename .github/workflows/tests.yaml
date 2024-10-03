@@ -14,65 +14,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    uses: ./.github/workflows/_build_wheels.yaml
-
   twine-check:
     name: Check dist
-    needs: [ build ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
-        with:
-          pattern: wheels-*
-          path: dist
-          merge-multiple: true
-
+      - run: pipx run build
       - run: pipx run twine check --strict dist/*
-
-  test-cp-build:
-    needs: [ build ]
-    strategy:
-      fail-fast: false
-      matrix:
-        os:
-          - "windows-latest"
-          - "ubuntu-22.04"
-          - "macos-13"
-          - "macos-14"
-        python-version:
-          - "3.8"
-          - "3.9"
-          - "3.10"
-          - "3.11"
-          - "3.12"
-          - "~3.13.0-rc.1"
-        exclude:
-          - { os: macos-14, python-version: '3.8' }
-          - { os: macos-14, python-version: '3.9' }
-
-    runs-on: "${{ matrix.os }}"
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/download-artifact@v4
-        with:
-          pattern: wheels-*
-          path: dist
-          merge-multiple: true
-
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: "pip"
-
-      - run: python -m pip install -U pip
-      - run: pip install php_serialize --no-index --find-links ./dist/
-      - run: pip install -r requirements.txt
-
-      - run: pytest --assert-pkg-compiled=true
 
   test-cp:
     strategy:
@@ -153,7 +100,6 @@ jobs:
     needs:
       - test-cp
       - test-pp
-      - test-cp-build
       - twine-check
     runs-on: 'ubuntu-latest'
     steps:

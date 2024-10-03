@@ -14,12 +14,7 @@ jobs:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
-        with:
-          pattern: wheels-*
-          path: dist
-          merge-multiple: true
-
+      - run: pipx run build
       - run: pipx run twine upload dist/* --disable-progress-bar
         env:
           TWINE_USERNAME: '__token__'
