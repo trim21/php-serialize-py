@@ -16,6 +16,8 @@ from pathlib import Path
 from types import MappingProxyType
 from typing import Any, Mapping
 
+from typing_extensions import Buffer
+
 COMPILED = Path(__file__).suffix in (".pyd", ".so")
 
 __all__ = (
@@ -27,7 +29,7 @@ __all__ = (
 )
 
 
-def loads(data: bytes | str) -> Any:
+def loads(data: Buffer | str) -> Any:
     """Read a PHP-serialized object hierarchy from a string.  Characters in the
     string past the object's representation are ignored.  On Python 3 the
     string must be a bytestring.
@@ -109,16 +111,16 @@ class Decoder:
             self.__expect(b":")
             length = int(self.__read_until(b":"))
             self.__expect(b'"')
-            data = self.fp.read(length).decode()
+            s = self.fp.read(length).decode()
             self.__expect(b'"')
             self.__expect(b";")
-            return data
+            return s
         if opcode == b"a":
             self.__expect(b":")
             return dict(self.__load_array())
         if opcode in (b"O", b"C"):
             raise ValueError("deserialize php object is not allowed")
-        raise ValueError(f"unexpected opcode {opcode}")  # pragma: no cover
+        raise ValueError(f"unexpected opcode {opcode!r}")  # pragma: no cover
 
     def decode(self) -> Any:
         return self.__decode()
@@ -233,9 +235,7 @@ def __key_to_binary(key: Any) -> bytes:
     raise TypeError(f"expected value as dict key {key!r}")
 
 
-def __ensure_binary(s: str | BytesIO) -> bytes:
-    if isinstance(s, bytes):
-        return s
+def __ensure_binary(s: str | Buffer) -> memoryview:
     if isinstance(s, str):
-        return s.encode()
-    raise TypeError(f"not expecting type '{type(s)}'")
+        return memoryview(s.encode())
+    return memoryview(s)

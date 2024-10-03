@@ -3,11 +3,11 @@ from __future__ import annotations
 import php_serialize
 
 
-def pytest_addoption(parser):
+def pytest_addoption(parser) -> None:
     parser.addoption("--assert-pkg-compiled", action="store", default=None)
 
 
-def pytest_configure(config):
+def pytest_configure(config) -> None:
     assert_pkg_compiled: str | None = config.option.assert_pkg_compiled
     if assert_pkg_compiled is None:
         return
