@@ -11,10 +11,11 @@ Copyright 2007-2016 by Armin Ronacher.
 from __future__ import annotations
 
 from collections import OrderedDict
+from collections.abc import Mapping
 from io import BytesIO
 from pathlib import Path
 from types import MappingProxyType
-from typing import Any, Mapping
+from typing import Any
 
 from typing_extensions import Buffer
 
