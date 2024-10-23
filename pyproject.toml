@@ -45,6 +45,21 @@ include = ['src/']
 [tool.hatch.build.targets.wheel]
 packages = ["src/php_serialize"]
 
+[tool.hatch.build.targets.wheel.hooks.cython]
+enable-by-default = false
+dependencies = ["hatch-cython<1"]
+
+[tool.hatch.build.targets.wheel.hooks.cython.options]
+directives = { boundscheck = false, nonecheck = false, language_level = 3, binding = true }
+src = "php_serialize"
+
+[tool.cibuildwheel]
+before-build = "python cleanup.py"
+skip = "pp* *musllinux*"
+
+[tool.cibuildwheel.environment]
+HATCH_BUILD_HOOKS_ENABLE = "1"
+
 [tool.black]
 target-version = ['py38']
 line-length = 88

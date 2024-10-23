@@ -14,12 +14,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  build:
+    uses: ./.github/workflows/_build_wheels.yaml
+
   twine-check:
     name: Check dist
+    needs: [ build ]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: pipx run build
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: wheels-*
+          path: dist
+          merge-multiple: true
+
       - run: pipx run twine check --strict dist/*
 
   test-cp:
