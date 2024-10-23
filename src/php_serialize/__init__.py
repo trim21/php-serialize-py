@@ -239,4 +239,4 @@ def __key_to_binary(key: Any) -> bytes:
 def __ensure_binary(s: str | Buffer) -> memoryview:
     if isinstance(s, str):
         return memoryview(s.encode())
-    return memoryview(s)
+    return memoryview(s).cast("B")
