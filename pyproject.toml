@@ -3,7 +3,7 @@ requires = ["hatchling>=1.20.0"]
 build-backend = "hatchling.build"
 
 [project]
-name = "php-serialize"
+name = "serialize-php"
 version = "0.0.1"
 description = "handle contents of serialize/deserialize in php"
 license = { text = "MIT" }
