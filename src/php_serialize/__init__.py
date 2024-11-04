@@ -124,7 +124,10 @@ class Decoder:
         raise ValueError(f"unexpected opcode {opcode!r}")  # pragma: no cover
 
     def decode(self) -> Any:
-        return self.__decode()
+        val = self.__decode()
+        if self.fp.read(1):
+            raise ValueError("extra data")
+        return val
 
 
 def __encode(value: Any, r: BytesIO, seen: set[int]) -> None:
@@ -236,7 +239,7 @@ def __key_to_binary(key: Any) -> bytes:
     raise TypeError(f"expected value as dict key {key!r}")
 
 
-def __ensure_binary(s: str | Buffer) -> memoryview:
+def __ensure_binary(s: str | Buffer) -> Buffer:
     if isinstance(s, str):
-        return memoryview(s.encode())
-    return memoryview(s).cast("B")
+        return s.encode()
+    return s
