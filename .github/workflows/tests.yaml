@@ -61,7 +61,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: "pip"
 
-      - run: pip install serialize-php --no-index --find-links=dist
+      - run: pip install serialize-php --no-deps --no-index --find-links=dist
 
       - run: pip install -r requirements.txt
 
@@ -98,7 +98,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: "pip"
 
-      - run: pip install serialize-php --no-index --find-links=dist
+      - run: pip install serialize-php --no-deps --no-index --find-links=dist
 
       - run: pip install -r requirements.txt
 
