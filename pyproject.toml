@@ -45,6 +45,9 @@ Homepage = "https://github.com/trim21/php-serialize-py"
 Repository = "https://github.com/trim21/php-serialize-py"
 Issues = "https://github.com/trim21/php-serialize-py/issues"
 
+[tool.flit.module]
+name = 'php_serialize'
+
 [tool.cibuildwheel]
 skip = "pp* *musllinux*"
 environment = { PHP_SERIALIZE_PY_CYTHON = '1' }
@@ -54,7 +57,6 @@ target-version = ['py39']
 line-length = 88
 
 [tool.ruff]
-target-version = 'py39'
 line-length = 88
 
 src = ['src', 'tests']
