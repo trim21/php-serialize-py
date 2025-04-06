@@ -100,7 +100,6 @@ jobs:
           cache: "pip"
 
       - run: pip install serialize-php --no-deps --no-index --find-links=dist
-      - run: pip install -r requirements.txt
 
       - run: pip install -r requirements.txt
 
