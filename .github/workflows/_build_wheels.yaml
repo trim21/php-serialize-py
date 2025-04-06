@@ -57,7 +57,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: pipx run build -w
+      - run: pipx install 'flit>3,<4'
+
+      - run: flit build --format=wheel
 
       - uses: actions/upload-artifact@v4
         with:
