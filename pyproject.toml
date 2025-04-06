@@ -1,6 +1,10 @@
 [build-system]
-requires = ["hatchling>=1.20.0"]
-build-backend = "hatchling.build"
+requires = [
+    'cython>=3,<4',
+    'meson-python>=0.14.0',
+    'meson[ninja]>=1.2.1',
+]
+build-backend = 'mesonpy'
 
 [project]
 name = "serialize-php"
@@ -38,41 +42,25 @@ Homepage = "https://github.com/trim21/php-serialize-py"
 Repository = "https://github.com/trim21/php-serialize-py"
 Issues = "https://github.com/trim21/php-serialize-py/issues"
 
-[tool.hatch.build.targets.sdist]
-sources = ["src/"]
-include = ['src/']
-
-[tool.hatch.build.targets.wheel]
-packages = ["src/php_serialize"]
-
-[tool.hatch.build.targets.wheel.hooks.cython]
-enable-by-default = false
-dependencies = ["hatch-cython<1"]
-
-[tool.hatch.build.targets.wheel.hooks.cython.options]
-directives = { boundscheck = false, nonecheck = false, language_level = 3, binding = true }
-src = "php_serialize"
+# use flit to build a pure-python package
+[tool.flit.module]
+name = 'php_serialize'
 
 [tool.cibuildwheel]
-before-build = "python cleanup.py"
 skip = "pp* *musllinux*"
-
-[tool.cibuildwheel.environment]
-HATCH_BUILD_HOOKS_ENABLE = "1"
 
 [tool.black]
 target-version = ['py39']
 line-length = 88
 
 [tool.ruff]
-target-version = 'py39'
 line-length = 88
 
 src = ['src', 'tests']
 
 [tool.ruff.lint]
 extend-select = ['UP', 'I', 'E', "W", 'FA', 'ANN']
-ignore = ['ANN101', 'ANN401', 'E721', 'E501']
+ignore = ['ANN401', 'E721', 'E501']
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ['ANN']
