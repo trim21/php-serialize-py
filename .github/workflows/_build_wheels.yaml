@@ -10,11 +10,11 @@ jobs:
     strategy:
       matrix:
         include:
-          - { os: windows-latest, cibw_arch: AMD64, cibw_build: "*[02468]-* *[02468]t-*" }
-          - { os: windows-latest, cibw_arch: AMD64, cibw_build: "*[13579]-* *[13579]t-*" }
+          - { os: windows-latest, cibw_arch: AMD64, cibw_build: "*[02468]-*" }
+          - { os: windows-latest, cibw_arch: AMD64, cibw_build: "*[13579]-*" }
 
-          - { os: ubuntu-latest, cibw_arch: x86_64, cibw_build: "*[02468]-* *[02468]t-*" }
-          - { os: ubuntu-latest, cibw_arch: x86_64, cibw_build: "*[13579]-* *[13579]t-*" }
+          - { os: ubuntu-latest, cibw_arch: x86_64, cibw_build: "*[02468]-*" }
+          - { os: ubuntu-latest, cibw_arch: x86_64, cibw_build: "*[13579]-*" }
 
     steps:
       - uses: actions/checkout@v4
@@ -31,7 +31,7 @@ jobs:
           restore-keys: |
             cibuildwheel-${{ runner.os }}-${{ matrix.cibw_arch }}
 
-      - uses: pypa/cibuildwheel@v2.23.3
+      - uses: pypa/cibuildwheel@v3.0.1
         env:
           CIBW_BUILD_VERBOSITY: 1
           CIBW_ARCHS: ${{ matrix.cibw_arch }}
