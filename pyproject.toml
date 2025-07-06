@@ -47,7 +47,7 @@ Issues = "https://github.com/trim21/php-serialize-py/issues"
 name = 'php_serialize'
 
 [tool.cibuildwheel]
-skip = "pp* *musllinux*"
+skip = "*musllinux*"
 
 [tool.black]
 target-version = ['py39']
