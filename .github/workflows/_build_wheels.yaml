@@ -31,7 +31,7 @@ jobs:
           restore-keys: |
             cibuildwheel-${{ runner.os }}-${{ matrix.cibw_arch }}
 
-      - uses: pypa/cibuildwheel@v3.1.3
+      - uses: pypa/cibuildwheel@v3.1.4
         env:
           CIBW_BUILD_VERBOSITY: 1
           CIBW_ARCHS: ${{ matrix.cibw_arch }}
