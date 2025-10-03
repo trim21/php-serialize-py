@@ -2,6 +2,6 @@ typing-extensions>=4.12.2
 
 mypy ; implementation_name == "cpython"
 # test
-pytest==8.4.1
+pytest==8.4.2
 pytest-cov==7.0.0
 pytest-github-actions-annotate-failures==0.3.0
