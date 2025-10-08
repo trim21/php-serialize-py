@@ -278,3 +278,5 @@ pyrightconfig.json
 # End of https://www.toptal.com/developers/gitignore/api/c++,python,c,visualstudiocode
 .task/
 taskfile.yaml
+
+.vscode/
