@@ -41,7 +41,7 @@ jobs:
 
       - run: ls ./wheelhouse/
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: 'wheels-${{ runner.os }}-${{ matrix.arch }}-${{ strategy.job-index }}'
           path: ./wheelhouse/*.whl
@@ -56,7 +56,7 @@ jobs:
 
       - run: flit build --format=wheel
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: 'wheels-pure-py'
           path: dist/*
