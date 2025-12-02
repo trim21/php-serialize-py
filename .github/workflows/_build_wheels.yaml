@@ -17,7 +17,7 @@ jobs:
           - { os: ubuntu-latest, cibw_arch: x86_64, cibw_build: "*[13579]-*" }
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: Restore cached Primes
         id: cache
@@ -50,7 +50,7 @@ jobs:
     name: make pure python wheel
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - run: pipx install 'flit>3,<4'
 
