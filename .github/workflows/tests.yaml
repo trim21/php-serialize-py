@@ -37,11 +37,11 @@ jobs:
         os:
           - "ubuntu-24.04"
         python-version:
-          - "3.9"
           - "3.10"
           - "3.11"
           - "3.12"
           - "3.13"
+          - "3.14"
 
     needs: [build]
     runs-on: "${{ matrix.os }}"
@@ -78,7 +78,6 @@ jobs:
         os:
           - "ubuntu-24.04"
         python-version:
-          - "pypy3.9"
           - "pypy3.10"
 
     needs: [build]
