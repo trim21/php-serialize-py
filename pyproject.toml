@@ -2,7 +2,7 @@
 requires = [
     'cython==3.2.3',
     'meson-python==0.18.0',
-    'meson[ninja]==1.9.1',
+    'meson[ninja]==1.10.0',
 ]
 build-backend = 'mesonpy'
 
