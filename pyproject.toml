@@ -1,6 +1,6 @@
 [build-system]
 requires = [
-    'cython==3.2.2',
+    'cython==3.2.3',
     'meson-python==0.18.0',
     'meson[ninja]==1.9.1',
 ]
