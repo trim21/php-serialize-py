@@ -4,4 +4,4 @@ mypy ; implementation_name == "cpython"
 # test
 pytest==9.0.2
 pytest-cov==7.0.0
-pytest-github-actions-annotate-failures==0.3.0
+pytest-github-actions-annotate-failures==0.4.0
