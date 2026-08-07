@@ -22,11 +22,11 @@ from typing_extensions import Buffer
 COMPILED = Path(__file__).suffix in (".pyd", ".so")
 
 __all__ = (
-    "dict_to_list",
-    "loads",
-    "dumps",
-    "PHPSerializeError",
     "COMPILED",
+    "PHPSerializeError",
+    "dict_to_list",
+    "dumps",
+    "loads",
 )
 
 
